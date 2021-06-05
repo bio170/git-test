@@ -28,6 +28,7 @@ pipeline {
                         stage('Unit Test') {
                                 steps{
                                         echo "Running the unit test..."
+					
                                 }
                         }
                         stage('Integration test') {
@@ -40,6 +41,11 @@ pipeline {
 				steps {
 					echo 'Running the integration test..'
 				}
+				docker.withRegistry('', 'docker-hub-credentials') {
+sh "docker login -u ${bio170} -p ${rahul123.}"
+myImage.push("${env.BUILD_NUMBER}")
+myImage.push("latest")
+}
                                
 			}  }
         }
